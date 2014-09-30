@@ -12,8 +12,10 @@ Collection
 		* [TreeSet](#treeset)
 		* [NavigableSet](#navigableSet)
 	+ [Map](#map)
-	+ [Object class](#object-class)
-	+ [Comparator](#comparator)
+	+ [List](#list)
+	+ [Queue](#queue)
+- [Object class](#object-class)
+- [Comparator](#comparator)
 - [Java Collection Framework](#java-collection-framework)
 - [Utilities](#utilities)
 	+ [Arrays](#arrays)
@@ -187,8 +189,43 @@ API of [Map][Set.html]:
 API of [Map][Map.html]:
 - An object that maps keys to values. A map **cannot** contain duplicate keys; each key can map to at most one value.
 
+### List
+[API][List.html]:
+- Implementing Classes:
+	+ ArrayList
+	+ LinkedList
+- An ordered collection
+- The user can access elements by their integer **index** (position in the list)
+- Unlike sets, lists typically allow **duplicate** elements. More formally, lists typically allow pairs of elements e1 and e2 such that e1.equals(e2), and they typically **allow** multiple `null` elements if they allow null elements at all.
+- Part of Method
+	+ `void	add(int index, E element)`:  (optional operation)
+	+ `boolean	addAll(Collection<? extends E> c)`:  (optional operation)
+	+ `void	clear()`: (optional operation)
+	+ `E	remove(int index)`: (optional operation)
+	+ `boolean	remove(Object o)`: (optional operation) Removes the **first** occurrence of the specified element from this list, if it is present 
+	+ `boolean	contains(Object o)`: (optional operation)
+	+ `boolean	retainAll(Collection<?> c)`: (optional operation)
+	+ `E	get(int index)`
+	+ `int	indexOf(Object o)`:	Returns the index of the first occurrence of the specified element in this list, or **-1** if this list does not contain the element.
+	+ `Iterator<E>	iterator()`
+	+ `ListIterator<E>	listIterator()`
+	+ `boolean	retainAll(Collection<?> c)`
+	+ `Object[]	toArray()`
 
-### Object class
+### Queue
+[API][Queue.html]:
+- Part of Method
+	+ `E	element()`:	Retrieves, but does **not** remove, the head of this queue.
+		* Throws: `NoSuchElementException` if this queue is empty
+	+ `E	peek()`: Retrieves, but does **not** remove, the head of this queue, or returns **null** if this queue is empty.
+	+ `boolean	offer(E e)`
+	+ `E	remove()`: Retrieves and removes the head of this queue.
+		* Throws: `NoSuchElementException` if this queue is empty
+	+ `E	poll()`: Retrieves and removes the head of this queue, or returns null if this queue is empty.
+- Use `peek`, `poll`, `offer` to avoid `NoSuchElementException`
+
+
+## Object class
 
 `boolean	equals(Object obj)` are method of `Object`.
 我們可以用String物件來理解equals。
@@ -302,16 +339,14 @@ The general contract of hashCode is:
 	}
 ```
 
-### Comparator
+## Comparator
 
 
 ## Java Collection Framework
 
-在正式討論前先看下圖。
-
-
 ![colls-coreinterfaces.gif](img/colls-coreinterfaces.gif)
 ![ContainerTaxonomy.png](img/ContainerTaxonomy.png)
+
 Java將容器分成兩種：
 
 1.	Collection：各自獨立的元素
@@ -366,3 +401,5 @@ Java將容器分成兩種：
 [Comparable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html
 [Map.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Map.html
 [Set.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Set.html
+[List.html]: http://docs.oracle.com/javase/7/docs/api/java/util/List.html
+[Queue.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Queue.html
