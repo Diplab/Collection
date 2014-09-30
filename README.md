@@ -16,7 +16,7 @@ Collection
 
 所以Java提供了一系列的工具可以使用，都在[java.util][java.util]裏。
 
-### 簡易Demo -- 泛型
+### 簡易Demo -- 泛型、Collection介面
 
 此部分的程式碼可以參考[DemoBasicCollection][DemoBasicCollection]。
 
@@ -62,9 +62,66 @@ Collection
 		//System.out.println(aApple.getClass().getSimpleName() + "\t" + aApple.getId());
 	}
 ```
+仔細觀察以上兩個版本的差異。
 
-仔細觀察兩項的差異。
+再來，我們可以仔細觀察API，發現ArrayList實作`Collection`，因此我們可以用**foreach**的方式來遍歷。
+
+```java
+	public static void main(String[] args) {
+		Collection<Integer> c = new ArrayList<Integer>();
+		for (int i = 0; i < 10; i++) {
+			c.add(i);	//auto boxing
+		}
+		
+		for (Integer integer : c) {
+			System.out.println(integer);	//auto unboxing
+		}
+	}
+```
+## Collection介面
+
+最初，先看[Collection.html][Collection.html]。以下整理幾點：
+
+- Some collections allow duplicate elements and others do not.
+- Some are ordered and others unordered. 
+- This interface is typically used to pass collections around and manipulate them where maximum generality is desired.
+- should provide two "standard" constructors: a void (no arguments) constructor, which creates an empty collection, and a constructor with a single argument of type Collection.
+- The "destructive" methods contained in this interface, that is, the methods that modify the collection on which they operate, are specified to throw `UnsupportedOperationException` if this collection does not support the operation.
+	+ add(E e)
+	+ addAll(Collection<? extends E> c)
+	+ remove(Object o)
+	+ removeAll(Collection<?> c)
+	+ retainAll(Collection<?> c)
+- some implementations prohibit null elements, and some have restrictions on the types of their elements. Attempting to add an ineligible element throws an unchecked exception, typically `NullPointerException` or `ClassCastException`.
+- Many methods in Collections Framework interfaces are defined in terms of the `equals` method.
+	+ For example, the specification for the contains(Object o) method says: "returns true if and only if this collection contains at least one element e such that (o==null ? e==null : o.equals(e))." 
+- It extends [Iterable<E>][Iterable.html]
+	+ Implementing this interface allows an object to be the target of the "foreach" statement.
+官方文件上的個點都非常重要，在後文中也會陸續提到，務必掌握。
+
+
+## Java Collection Framework
+
+在正式討論前先看下圖。
+
+Java將容器分成兩種：
+
+1.	Collection：各自獨立的元素
+	
+	1.	List
+	2. 	Set
+	3. 	Queue
+2. 	Map：key-value成對
+
+## 其他議題
+
+- Auto-box/unbox
+- 
+
+![colls-coreinterfaces.gif](img/colls-coreinterfaces.gif)
 
 [java.util]: http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
 [DemoBasicCollection]: DemoBasicCollection
 [ArrayList.html#add(E)]: http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html#add(E)
+[Collection.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html
+[Iterable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html

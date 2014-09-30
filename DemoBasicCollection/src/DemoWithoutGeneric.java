@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class DemoWithoutGeneric {
 
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		ArrayList apples = new ArrayList();
 		apples.add(new Apple());
