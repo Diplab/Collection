@@ -16,6 +16,7 @@ Collection
 	+ [Queue](#queue)
 - [Object class](#object-class)
 - [Comparator](#comparator)
+- [Iterator](#iterator)
 - [Java Collection Framework](#java-collection-framework)
 - [Utilities](#utilities)
 	+ [Arrays](#arrays)
@@ -341,6 +342,7 @@ The general contract of hashCode is:
 
 ## Comparator
 
+## Iterator
 
 ## Java Collection Framework
 
