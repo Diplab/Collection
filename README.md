@@ -4,6 +4,11 @@ Collection
 ## Outline
 
 - [前言](#前言)
+- [什麼是容器（群集）？](#什麼是容器（群集）？)
+- [Collection介面](#Collection介面)
+- [Java Collection Framework](#Java Collection Framework)
+- [Utilities](#Utilities)
+
 
 ## 前言
 
@@ -136,12 +141,12 @@ Java將容器分成兩種：
 	+ For example, invoking the sort method on an unmodifiable list that is already sorted may or may not throw UnsupportedOperationException.
 -	`static <T> boolean	addAll(Collection<? super T> c, T... elements)`
 -	`static void	shuffle(List<?> list)`
--	`static <T extends Comparable<? super T>> void	sort(List<T> list)
+-	`static <T extends Comparable<? super T>> void	sort(List<T> list)`
 
 ## 其他議題
 
 - Auto-box/unbox
-
+- SuppressWarnings annotation
 
 [java.util]: http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
 [DemoBasicCollection]: DemoBasicCollection
