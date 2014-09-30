@@ -4,15 +4,15 @@ Collection
 ## Outline
 
 - [前言](#前言)
-- [什麼是容器（群集）？](#什麼是容器（群集）？)
-- [Collection介面](#Collection介面)
-- [Java Collection Framework](#Java Collection Framework)
-- [Utilities](#Utilities)
+- [什麼是容器（群集）？](#什麼是容器)
+- [Collection介面](#collection介面)
+- [Java Collection Framework](#java-collection-framework)
+- [Utilities](#utilities)
 
 
 ## 前言
 
-### 什麼是容器（群集）？
+### 什麼是容器
 
 存放物件或是屬性的地方，就之前所看到`Array`. 但是`Array`有以下缺點：
 
