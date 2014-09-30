@@ -87,11 +87,11 @@ Collection
 - This interface is typically used to pass collections around and manipulate them where maximum generality is desired.
 - should provide two "standard" constructors: a void (no arguments) constructor, which creates an empty collection, and a constructor with a single argument of type Collection.
 - The "destructive" methods contained in this interface, that is, the methods that modify the collection on which they operate, are specified to throw `UnsupportedOperationException` if this collection does not support the operation.
-	+ add(E e)
-	+ addAll(Collection<? extends E> c)
-	+ remove(Object o)
-	+ removeAll(Collection<?> c)
-	+ retainAll(Collection<?> c)
+	+ `add(E e)`
+	+ `addAll(Collection<? extends E> c)`
+	+ `remove(Object o)`
+	+ `removeAll(Collection<?> c)`
+	+ `retainAll(Collection<?> c)`
 - some implementations prohibit null elements, and some have restrictions on the types of their elements. Attempting to add an ineligible element throws an unchecked exception, typically `NullPointerException` or `ClassCastException`.
 - Many methods in Collections Framework interfaces are defined in terms of the `equals` method.
 	+ For example, the specification for the contains(Object o) method says: "returns true if and only if this collection contains at least one element e such that (o==null ? e==null : o.equals(e))." 
@@ -123,7 +123,8 @@ Java將容器分成兩種：
 觀察[API][Arrays.html]。
 
 - This class contains various methods for manipulating arrays (such as sorting and searching). This class also contains a static factory that allows arrays to be viewed as lists.
-- static <T> List<T>	asList(T... a)
+- `static <T> List<T>	asList(T... a)`
+- `static String	toString(Object[] a)`
 
 ### Collections
 
@@ -133,9 +134,9 @@ Java將容器分成兩種：
 - The methods of this class all throw a `NullPointerException` if the collections or class objects provided to them are null.
 - The "destructive" algorithms contained in this class, that is, the algorithms that modify the collection on which they operate, are specified to throw `UnsupportedOperationException` if the collection does not support the appropriate mutation primitive(s), such as the set method. 
 	+ For example, invoking the sort method on an unmodifiable list that is already sorted may or may not throw UnsupportedOperationException.
--	static <T> boolean	addAll(Collection<? super T> c, T... elements)
--	static void	shuffle(List<?> list)
--	static <T extends Comparable<? super T>> void	sort(List<T> list)
+-	`static <T> boolean	addAll(Collection<? super T> c, T... elements)`
+-	`static void	shuffle(List<?> list)`
+-	`static <T extends Comparable<? super T>> void	sort(List<T> list)
 
 ## 其他議題
 
