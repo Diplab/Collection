@@ -104,6 +104,9 @@ Collection
 
 在正式討論前先看下圖。
 
+
+![colls-coreinterfaces.gif](img/colls-coreinterfaces.gif)
+![ContainerTaxonomy.png](img/ContainerTaxonomy.png)
 Java將容器分成兩種：
 
 1.	Collection：各自獨立的元素
@@ -113,15 +116,36 @@ Java將容器分成兩種：
 	3. 	Queue
 2. 	Map：key-value成對
 
+## Utilities
+
+### Arrays
+
+觀察[API][Arrays.html]。
+
+- This class contains various methods for manipulating arrays (such as sorting and searching). This class also contains a static factory that allows arrays to be viewed as lists.
+- static <T> List<T>	asList(T... a)
+
+### Collections
+
+觀察[API][Collections.html]。
+
+- This class consists exclusively of static methods that operate on or return collections. It contains polymorphic algorithms that operate on collections, "wrappers", which return a new collection backed by a specified collection, and a few other odds and ends.
+- The methods of this class all throw a `NullPointerException` if the collections or class objects provided to them are null.
+- The "destructive" algorithms contained in this class, that is, the algorithms that modify the collection on which they operate, are specified to throw `UnsupportedOperationException` if the collection does not support the appropriate mutation primitive(s), such as the set method. 
+	+ For example, invoking the sort method on an unmodifiable list that is already sorted may or may not throw UnsupportedOperationException.
+-	static <T> boolean	addAll(Collection<? super T> c, T... elements)
+-	static void	shuffle(List<?> list)
+-	static <T extends Comparable<? super T>> void	sort(List<T> list)
+
 ## 其他議題
 
 - Auto-box/unbox
-- 
 
-![colls-coreinterfaces.gif](img/colls-coreinterfaces.gif)
 
 [java.util]: http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
 [DemoBasicCollection]: DemoBasicCollection
 [ArrayList.html#add(E)]: http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html#add(E)
 [Collection.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html
+[Collections.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html
 [Iterable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html
+[Arrays.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
