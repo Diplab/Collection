@@ -10,7 +10,7 @@ Collection
 	+ [Set](#set)
 		* [HashSet](#hashset)
 		* [TreeSet](#treeset)
-		* [NavigableSet](#navigableSet)
+		* [NavigableSet](#navigableset)
 	+ [Map](#map)
 	+ [List](#list)
 	+ [Queue](#queue)
