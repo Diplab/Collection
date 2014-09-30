@@ -4,10 +4,15 @@ Collection
 ## Outline
 
 - [前言](#前言)
-- [什麼是容器（群集）？](#什麼是容器)
+	+ [什麼是容器](#什麼是容器)
+	+ [泛型與容器](#泛型與容器)
 - [Collection介面](#collection介面)
+	+ [Object class](#object-class)
 - [Java Collection Framework](#java-collection-framework)
 - [Utilities](#utilities)
+	+ [Arrays](#arrays)
+	+ [Collections](#collections)
+- [其他議題](#其他議題)
 
 
 ## 前言
@@ -21,7 +26,7 @@ Collection
 
 所以Java提供了一系列的工具可以使用，都在[java.util][java.util]裏。
 
-### 簡易Demo -- 泛型、Collection介面
+### 泛型與容器
 
 此部分的程式碼可以參考[DemoBasicCollection][DemoBasicCollection]。
 
@@ -104,6 +109,121 @@ Collection
 	+ Implementing this interface allows an object to be the target of the "foreach" statement.
 官方文件上的個點都非常重要，在後文中也會陸續提到，務必掌握。
 
+### Object class
+
+`boolean	equals(Object obj)` are method of `Object`.
+我們可以用String物件來理解equals。
+
+```java
+	public static void main(String[] args) {
+		String a = new String("123");
+		System.out.println(a == "123");			//get false
+		System.out.println(a.equals("123"));	//get true
+		
+		Dog b = new Dog(1);
+		Dog c = new Dog(1);
+		System.out.println(b.equals(b));		//get true
+		System.out.println(b.equals(c));		//get false
+	}
+```
+
+See the source code:
+
+```java
+  public static boolean equal(@Nullable Object a, @Nullable Object b) {
+    return a == b || (a != null && a.equals(b));
+  }
+```
+
+另外一個跟collection比較有關的function為`public int hashCode()`。
+
+The general contract of hashCode is:
+
+- Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the **same integer**, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+- If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects **must** produce the same integer result.
+- It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+
+來看下面範例，以了解equals, hashCode 跟collection的關係。
+
+```java
+	import java.util.Collection;
+	import java.util.HashSet;
+	import java.util.LinkedList;
+
+	public class CollectionAndEquals {
+
+		public static void main(String[] args) {
+			Cat a = new Cat("123");
+			Cat b = new Cat("123");
+
+			Collection<Cat> setOfCat = new HashSet<Cat>();
+			setOfCat.add(a);
+			System.out.println(setOfCat.contains(b)); // return false
+
+			Pig c = new Pig("123");
+			Pig d = new Pig("123");
+			Collection<Pig> setOfPig = new LinkedList<Pig>();
+			setOfPig.add(c);
+			System.out.println(setOfPig.contains(d)); // return ture
+			setOfPig = new HashSet<Pig>();
+			setOfPig.add(c);
+			System.out.println(setOfPig.contains(d)); // return false
+			
+			c = new Pig2("123");
+			d = new Pig2("123");
+			setOfPig = new HashSet<Pig>();
+			setOfPig.add(c);
+			System.out.println(setOfPig.contains(d)); // return ture
+			
+			
+
+		}
+
+	}
+
+	class Cat {
+		String name;
+
+		public Cat(String name) {
+			super();
+			this.name = name;
+		}
+	}
+
+
+
+	class Pig {
+		String name;
+
+		public Pig(String name) {
+			super();
+			this.name = name;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null || !(obj instanceof Pig)) {
+				return false;
+			} else {
+				return this.name.equals(((Pig)obj).name);
+			}
+
+		}
+	}
+
+	class Pig2 extends Pig{
+		public Pig2(String name) {
+			super(name);
+		}
+		
+		@Override
+		public int hashCode() {
+			return super.name.hashCode();
+		}
+	}
+```
+
+
 
 ## Java Collection Framework
 
@@ -142,6 +262,12 @@ Java將容器分成兩種：
 -	`static <T> boolean	addAll(Collection<? super T> c, T... elements)`
 -	`static void	shuffle(List<?> list)`
 -	`static <T extends Comparable<? super T>> void	sort(List<T> list)`
+-	`static <T> int	binarySearch(List<? extends Comparable<? super T>> list, T key)`
+-	`static <T> int	binarySearch(List<? extends T> list, T key, Comparator<? super T> c)`
+	+	Searches the specified list for the specified object using the binary search algorithm. The list must be sorted into **ascending order according** to the specified `comparator` (as by the `sort(List, Comparator)` method), prior to making this call.
+	+	Returns the index of the search key, if it is contained in the list; 
+		otherwise, **(-(insertion point) - 1)**. The insertion point is defined as the point at which the key would be inserted into the list: the index of the first element greater than the key, or list.size() if all elements in the list are less than the specified key. Note that this guarantees that the return value will be >= 0 if and only if the key is found.
+	+	Boolean, Integer, Float, Double ... all implement [Comparable][Comparable.html]. That can use `Collections.sort` to sort without need of implementing `Comparable`.
 
 ## 其他議題
 
@@ -155,3 +281,4 @@ Java將容器分成兩種：
 [Collections.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html
 [Iterable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html
 [Arrays.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
+[Comparable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html
