@@ -1,0 +1,19 @@
+
+public class DemoWithoutGeneric {
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	
+}
+
+class Apple{
+	private static long counter = 0;
+	private long id = counter++;
+	public long getId(){
+		return id;
+	}
+}
