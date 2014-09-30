@@ -7,7 +7,13 @@ Collection
 	+ [什麼是容器](#什麼是容器)
 	+ [泛型與容器](#泛型與容器)
 - [Collection介面](#collection介面)
+	+ [Set](#set)
+		* [HashSet](#hashset)
+		* [TreeSet](#treeset)
+		* [NavigableSet](#navigableSet)
+	+ [Map](#map)
 	+ [Object class](#object-class)
+	+ [Comparator](#comparator)
 - [Java Collection Framework](#java-collection-framework)
 - [Utilities](#utilities)
 	+ [Arrays](#arrays)
@@ -108,6 +114,79 @@ Collection
 - It extends [Iterable<E>][Iterable.html]
 	+ Implementing this interface allows an object to be the target of the "foreach" statement.
 官方文件上的個點都非常重要，在後文中也會陸續提到，務必掌握。
+
+### Set
+API of [Map][Set.html]:
+- A collection that contains **no** duplicate elements. More formally, sets contain no pair of elements e1 and e2 such that e1.equals(e2), and at most one null element. As implied by its name, this interface models the mathematical set abstraction.
+
+#### HashSet
+`boolean	contains(Object o)`:
+- 先檢查hashCode是否有一樣的，沒有則回傳false
+- 如果有一樣的，檢查到有equals()為真時，回傳true 
+
+參見文後範例。
+
+#### TreeSet
+
+- Source Code
+	
+	```java
+	public class TreeSet<E>
+	extends AbstractSet<E>
+	implements NavigableSet<E>, Cloneable, Serializable{......}
+	```
+- The elements are ordered using their natural ordering, or by a Comparator provided at set creation time, depending on which constructor is used.
+- All Implemented Interfaces:
+	+ Serializable
+	+ Cloneable
+	+ Iterable<E>
+	+ Collection<E>
+	+ NavigableSet<E>
+	+ Set<E>
+	+ SortedSet<E>
+- Constructor:
+	+ `TreeSet()`: Constructs a new, empty tree set, sorted according to the **natural ordering** of its elements.
+	+ `TreeSet(Collection<? extends E> c)`: Constructs a new tree set containing the elements in the specified collection, sorted according to the **natural ordering** of its elements.
+	+ `TreeSet(Comparator<? super E> comparator)`: Constructs a new, empty tree set, sorted according to the specified comparator.
+	+ `TreeSet(SortedSet<E> s)`: TreeSet(SortedSet<E> s)
+
+
+
+#### NavigableSet
+
+- Methods `subSet(E, E)`, `headSet(E)`, and `tailSet(E)` are specified to return `SortedSet` to allow existing implementations of SortedSet to be compatibly retrofitted to implement NavigableSet, but extensions and implementations of this interface are encouraged to override these methods to return NavigableSet.
+
+範例可以很清楚了解內涵：
+
+```java
+	public static void main(String[] args) {
+		NavigableSet<Integer> set = new TreeSet<Integer>();
+		for (int i = 1; i < 11; i += 2) {
+			set.add(i);// auto boxing
+		}
+		NavigableSet<Integer> subSet = set.subSet(1, true, 5, true);
+		
+		//[1, 3, 5, 7, 9]	[1, 3, 5]
+		System.out.println(set + "\t" + subSet);
+		
+		subSet.remove(3);
+		//[1, 5, 7, 9]	[1, 5]
+		System.out.println(set + "\t" + subSet);
+		
+		set.add(4);
+		//[1, 4, 5, 7, 9]	[1, 4, 5]
+		System.out.println(set + "\t" + subSet);
+		
+		//get java.lang.IllegalArgumentException: key out of range
+		//subSet.add(6);
+	}
+```
+
+### Map
+
+API of [Map][Map.html]:
+- An object that maps keys to values. A map **cannot** contain duplicate keys; each key can map to at most one value.
+
 
 ### Object class
 
@@ -223,6 +302,7 @@ The general contract of hashCode is:
 	}
 ```
 
+### Comparator
 
 
 ## Java Collection Framework
@@ -240,6 +320,8 @@ Java將容器分成兩種：
 	2. 	Set
 	3. 	Queue
 2. 	Map：key-value成對
+
+
 
 ## Utilities
 
@@ -282,3 +364,5 @@ Java將容器分成兩種：
 [Iterable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html
 [Arrays.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
 [Comparable.html]: http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html
+[Map.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Map.html
+[Set.html]: http://docs.oracle.com/javase/7/docs/api/java/util/Set.html
