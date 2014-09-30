@@ -391,6 +391,9 @@ Java將容器分成兩種：
 - Auto-box/unbox
 - SuppressWarnings annotation
 
+## 參考文獻
+- [SCJP 6.0認證教戰手冊(第二版) 12章](https://docs.google.com/file/d/0BxoRjjtYAmGnLVhwREFRSkU2RXM/edit)
+
 [java.util]: http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
 [DemoBasicCollection]: DemoBasicCollection
 [ArrayList.html#add(E)]: http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html#add(E)
