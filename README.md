@@ -14,6 +14,7 @@ Collection
 	+ [Map](#map)
 	+ [List](#list)
 	+ [Queue](#queue)
+	+ [Dequeue](#dequeue)
 - [Object class](#object-class)
 - [Comparator](#comparator)
 - [Iterator](#iterator)
@@ -278,6 +279,11 @@ Example:
 
 ```
 
+### Dequeue
+
+- Usually pronounced as deck, a deque is a double-ended-queue.
+- both Stack and Queue
+- ![Deque Methods.png](img/Deque Methods.png)
 
 
 ## Object class
