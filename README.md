@@ -123,6 +123,11 @@ Collection
 API of [Map][Set.html]:
 - A collection that contains **no** duplicate elements. More formally, sets contain no pair of elements e1 and e2 such that e1.equals(e2), and at most one null element. As implied by its name, this interface models the mathematical set abstraction.
 
+The Java platform contains three general-purpose Set implementations: HashSet, TreeSet, and LinkedHashSet. 
+- `HashSet`, which stores its elements in a hash table, is the best-performing implementation; however it makes no guarantees concerning the order of iteration. 
+- `TreeSet`, which stores its elements in a red-black tree, orders its elements based on their values; it is substantially slower than HashSet. 
+- `LinkedHashSet`, which is implemented as a hash table with a linked list running through it, orders its elements based on the order in which they were inserted into the set (insertion-order). LinkedHashSet spares its clients from the unspecified, generally chaotic ordering provided by HashSet at a cost that is only slightly higher.
+
 #### HashSet
 `boolean	contains(Object o)`:
 - 先檢查hashCode是否有一樣的，沒有則回傳false
@@ -401,7 +406,17 @@ See below code:
 ## Iterator
 
 The `remove` method may be called only once per call to next and throws an exception if this rule is violated.
-I use `ListIterator` which is extend the interface `Iterator` to demo. 
+
+Use Iterator instead of the for-each construct when you need to:
+- Remove the current element. The for-each construct hides the iterator, so you cannot call remove. Therefore, the for-each construct is not usable for filtering.
+- Iterate over multiple collections in parallel.
+
+The operation of `ListIterator` which is extend the interface `Iterator` is complex.
+- ![colls-fivePossibleCursor](img/colls-fivePossibleCursor.gif)
+- Calls to next and previous can be intermixed, but you have to be a bit careful. The first call to previous returns the same element as the last call to next. Similarly, the first call to next after a sequence of calls to previous returns the same element as the last call to previous.
+- `set` or `remove` functions are change/remove the last returned object(by `next` or `previous`).
+
+I use `ListIterator` to demo. 
 
 ```java
 	import java.util.LinkedList;
@@ -411,7 +426,7 @@ I use `ListIterator` which is extend the interface `Iterator` to demo.
 
 		public static void main(String[] args) {
 			LinkedList<Integer> set = new LinkedList<Integer>();
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 0; i <= 4; i++) {
 				set.add(i);
 			}
 
@@ -419,6 +434,9 @@ I use `ListIterator` which is extend the interface `Iterator` to demo.
 			while (iterator.hasNext()) {
 				System.out.println(iterator.nextIndex() + "\t" + iterator.next());
 			}
+			
+			System.out.println(iterator.nextIndex());
+			System.out.println(iterator.previousIndex());
 
 			while (iterator.hasPrevious()) {
 				System.out.println(iterator.previousIndex() + "\t" + iterator.previous());
