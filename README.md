@@ -229,7 +229,55 @@ API of [Map][Map.html]:
 	+ `E	remove()`: Retrieves and removes the head of this queue.
 		* Throws: `NoSuchElementException` if this queue is empty
 	+ `E	poll()`: Retrieves and removes the head of this queue, or returns null if this queue is empty.
+	+ `boolean	add(E e)`: Inserts the specified element into this queue if it is possible to do so immediately without violating **capacity restrictions**, returning true upon success and throwing an IllegalStateException if no space is currently available.
+		* Throws:
+			- `IllegalStateException` - if the element cannot be added at this time due to capacity restrictions 
+			- `ClassCastException` - if the class of the specified element prevents it from being added to this queue 
+			- `NullPointerException` - if the specified element is null and this queue does not permit null elements
+			- `IllegalArgumentException` - if some property of this element prevents it from being added to this queue
 - Use `peek`, `poll`, `offer` to avoid `NoSuchElementException`
+- It is possible for a Queue implementation to restrict the number of elements that it holds.(**bounded**)
+	+ Some Queue implementations in java.util.concurrent are bounded, but the implementations in java.util are not.
+	+ It may throws IllegalStateException
+
+Each Queue method exists in two forms:
+- one throws an exception if the operation fails
+- the other returns a special value if the operation fails (either null or false, depending on the operation). 
+- ![Queue Interface Structure.png](img/Queue Interface Structure.png)
+
+Example:
+
+```java
+	import java.util.LinkedList;
+	import java.util.Queue;
+
+	public class CountDown {
+
+		public static void main(String[] args) throws InterruptedException {
+			Queue<Integer> queue = new LinkedList<Integer>();
+
+			for (int i = 10; i >= 0; i--)
+				queue.add(i);
+
+			while (!queue.isEmpty()) {
+				System.out.println(queue.remove());
+				Thread.sleep(100);
+			}
+			
+			for(int i = 10; i >= 0; i--)
+				queue.offer(i);
+			
+			Integer i ;
+			while (  (i = queue.poll()) != null ) {
+				System.out.println(i);
+				Thread.sleep(100);
+			}
+		}
+
+	}
+
+```
+
 
 
 ## Object class
