@@ -1,3 +1,5 @@
+import java.util.Collection;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class First {
@@ -9,14 +11,32 @@ public class First {
 //		 for(Integer integer : apples){
 //		 System.out.println(integer);
 //		 }
-		TreeSet<Integer> tree = new TreeSet<Integer>();
-			for(int i=1;i<13;i+=2){
-				
-				tree.add(i);
-				
+		Collection<ro> tree = new TreeSet<ro>();
+			tree.add(new ro(77));
+			tree.add(new ro(55));
+			tree.add(new ro(88));	
+			tree.add(new ro(456));
+			tree.add(new ro(257));
+			
+			System.out.println();			
+			for (ro ro : tree) {
+				System.out.println(ro.r);
 			}
-			
-			
 	}
 
+}
+
+
+class ro implements Comparable<ro> {
+	int r;
+	ro(int r){
+		this.r = r;		
+	}
+	@Override
+
+	public int compareTo(ro arg0){
+		
+		return this.r - arg0.r;
+	}
+	
 }
