@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class DemoArryas {
 
 	public static void main(String[] args) {
-		int a[] = {1,10,3,5,77,7};
+		int a[] = {1,10,3,5,80,7};
 		Arrays.sort(a);
 		System.out.println(a);
 		System.out.println(Arrays.toString(a));
