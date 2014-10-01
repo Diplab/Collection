@@ -2,9 +2,9 @@
 public class StringEquals {
 
 	public static void main(String[] args) {
-		String a = new String("123");
-		System.out.println(a == "123");			//get false
-		System.out.println(a.equals("123"));	//get true
+		String a = new String("456");
+		System.out.println(a == "456");			//get false
+		System.out.println(a.equals("456"));	//get true
 		
 		Dog b = new Dog(1);
 		Dog c = new Dog(1);
