@@ -196,6 +196,22 @@ The Java platform contains three general-purpose Set implementations: HashSet, T
 
 API of [Map][Map.html]:
 - An object that maps keys to values. A map **cannot** contain duplicate keys; each key can map to at most one value.
+- methods 
+	+ basic operations 
+		* put
+		* get
+		* remove
+		* containKey
+		* containValue
+		* size
+		* empty
+	+ bulk operation
+		* putAll
+		* clear
+	+ collection views
+		* keySet
+		* entrySet
+		* values
 
 ### List
 [API][List.html]:
@@ -206,18 +222,20 @@ API of [Map][Map.html]:
 - The user can access elements by their integer **index** (position in the list)
 - Unlike sets, lists typically allow **duplicate** elements. More formally, lists typically allow pairs of elements e1 and e2 such that e1.equals(e2), and they typically **allow** multiple `null` elements if they allow null elements at all.
 - Part of Method
-	+ `void	add(int index, E element)`:  (optional operation)
-	+ `boolean	addAll(Collection<? extends E> c)`:  (optional operation)
-	+ `void	clear()`: (optional operation)
-	+ `E	remove(int index)`: (optional operation)
-	+ `boolean	remove(Object o)`: (optional operation) Removes the **first** occurrence of the specified element from this list, if it is present 
-	+ `boolean	contains(Object o)`: (optional operation)
-	+ `boolean	retainAll(Collection<?> c)`: (optional operation)
-	+ `E	get(int index)`
-	+ `int	indexOf(Object o)`:	Returns the index of the first occurrence of the specified element in this list, or **-1** if this list does not contain the element.
+	+ basic operations
+		* `void	add(int index, E element)`:  (optional operation)
+		* `boolean	remove(Object o)`: (optional operation) Removes the **first** occurrence of the specified element from this list, if it is present 
+		* `E	remove(int index)`: (optional operation)
+		* `boolean	contains(Object o)`: (optional operation)
+		* `E	get(int index)`
+		* `int	indexOf(Object o)`:	Returns the index of the first occurrence of the specified element in this list, or **-1** if this list does not contain the element.
+	+ bulk operations
+		* `boolean	addAll(Collection<? extends E> c)`:  (optional operation)
+		* `void	clear()`: (optional operation) 
+		* `boolean	retainAll(Collection<?> c)`: (optional operation)
+		* `boolean	retainAll(Collection<?> c)`
 	+ `Iterator<E>	iterator()`
 	+ `ListIterator<E>	listIterator()`
-	+ `boolean	retainAll(Collection<?> c)`
 	+ `Object[]	toArray()`
 
 ### Queue
