@@ -8,9 +8,11 @@ public class DemoTreeSet {
 		Collection<Dog> set = new TreeSet<Dog>();
 		set.add(new Dog(10));
 		set.add(new Dog(5));
-		set.add(new Dog(5));
+		boolean success = set.add(new Dog(5));	//false: if duplicated (compare function return 0 == same)
 		set.add(new Dog(7));
-
+		
+		System.out.println(success);
+		
 		System.out.println(set);
 		for (Dog dog : set) {
 			System.out.println(dog.age);
