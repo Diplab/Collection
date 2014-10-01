@@ -116,6 +116,7 @@ Collection
 	+ For example, the specification for the contains(Object o) method says: "returns true if and only if this collection contains at least one element e such that (o==null ? e==null : o.equals(e))." 
 - It extends [Iterable<E>][Iterable.html]
 	+ Implementing this interface allows an object to be the target of the "foreach" statement.
+
 官方文件上的個點都非常重要，在後文中也會陸續提到，務必掌握。
 
 ### Set
