@@ -400,6 +400,7 @@ See below code:
 
 ## Iterator
 
+The `remove` method may be called only once per call to next and throws an exception if this rule is violated.
 I use `ListIterator` which is extend the interface `Iterator` to demo. 
 
 ```java
@@ -422,10 +423,15 @@ I use `ListIterator` which is extend the interface `Iterator` to demo.
 			while (iterator.hasPrevious()) {
 				System.out.println(iterator.previousIndex() + "\t" + iterator.previous());
 			}
+			
+			iterator.remove();	//1 will be remove
+
+			//throw java.lang.IllegalStateException
+			//iterator.remove();
+			System.out.println(set);  //[2, 3, 4, 5]
 		}
 
 	}
-
 ```
 
 ## Java Collection Framework

@@ -17,6 +17,12 @@ public class BasicIteratorDemo {
 		while (iterator.hasPrevious()) {
 			System.out.println(iterator.previousIndex() + "\t" + iterator.previous());
 		}
+		
+		iterator.remove();	//1 will be remove
+
+		//throw java.lang.IllegalStateException
+		//iterator.remove();
+		System.out.println(set);  //[2, 3, 4, 5]
 	}
 
 }
