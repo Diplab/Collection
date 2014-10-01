@@ -343,7 +343,90 @@ The general contract of hashCode is:
 
 ## Comparator
 
+See below code:
+
+```java
+	import java.util.Collection;
+	import java.util.Comparator;
+	import java.util.TreeSet;
+
+	public class DemoTreeSet {
+
+		public static void main(String[] args) {
+			Collection<Dog> set = new TreeSet<Dog>();
+			set.add(new Dog(10));
+			set.add(new Dog(5));
+			boolean success = set.add(new Dog(5));	//false: if duplicated (compare function return 0 == same)
+			set.add(new Dog(7));
+			
+			System.out.println(success);
+			
+			System.out.println(set);
+			for (Dog dog : set) {
+				System.out.println(dog.age);
+			}
+
+			Collection<Dog> set2 = new TreeSet<Dog>(new Comparator<Dog>() {
+
+				@Override
+				public int compare(Dog arg0, Dog arg1) {
+					return arg1.age - arg0.age;
+				}
+			});
+			
+			set2.addAll(set);
+			System.out.println(set);
+			for (Dog dog : set2) {
+				System.out.println(dog.age);
+			}
+			
+		}
+
+	}
+
+	class Dog implements Comparable<Dog> {
+		int age;
+
+		Dog(int age) {
+			this.age = age;
+		}
+
+		@Override
+		public int compareTo(Dog arg0) {
+			return this.age - arg0.age;
+		}
+	}
+```
+
 ## Iterator
+
+I use `ListIterator` which is extend the interface `Iterator` to demo. 
+
+```java
+	import java.util.LinkedList;
+	import java.util.ListIterator;
+
+	public class BasicIteratorDemo {
+
+		public static void main(String[] args) {
+			LinkedList<Integer> set = new LinkedList<Integer>();
+			for (int i = 1; i <= 5; i++) {
+				set.add(i);
+			}
+
+			ListIterator<Integer> iterator = set.listIterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.nextIndex() + "\t" + iterator.next());
+			}
+
+			while (iterator.hasPrevious()) {
+				System.out.println(iterator.previousIndex() + "\t" + iterator.previous());
+			}
+		}
+
+	}
+
+```
 
 ## Java Collection Framework
 
