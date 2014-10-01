@@ -106,11 +106,11 @@ Collection
 - This interface is typically used to pass collections around and manipulate them where maximum generality is desired.
 - should provide two "standard" constructors: a void (no arguments) constructor, which creates an empty collection, and a constructor with a single argument of type Collection.
 - The "destructive" methods contained in this interface, that is, the methods that modify the collection on which they operate, are specified to throw `UnsupportedOperationException` if this collection does not support the operation.
-	+ `add(E e)`
-	+ `addAll(Collection<? extends E> c)`
-	+ `remove(Object o)`
-	+ `removeAll(Collection<?> c)`
-	+ `retainAll(Collection<?> c)`
+	+ `add(E e)`: Returns true if this collection changed as a result of the call
+	+ `addAll(Collection<? extends E> c)`: Returns true if this collection changed as a result of the call
+	+ `remove(Object o)`: Returns true if an element was removed as a result of this call
+	+ `removeAll(Collection<?> c)`: Returns true if an element was removed as a result of this call
+	+ `retainAll(Collection<?> c)`: Returns true if this collection changed as a result of the call
 - some implementations prohibit null elements, and some have restrictions on the types of their elements. Attempting to add an ineligible element throws an unchecked exception, typically `NullPointerException` or `ClassCastException`.
 - Many methods in Collections Framework interfaces are defined in terms of the `equals` method.
 	+ For example, the specification for the contains(Object o) method says: "returns true if and only if this collection contains at least one element e such that (o==null ? e==null : o.equals(e))." 
@@ -396,6 +396,7 @@ Java將容器分成兩種：
 
 ## 參考文獻
 - [SCJP 6.0認證教戰手冊(第二版) 12章](https://docs.google.com/file/d/0BxoRjjtYAmGnLVhwREFRSkU2RXM/edit)
+- [Java Tutorial by Oracle](http://docs.oracle.com/javase/tutorial/collections/index.html)
 
 [java.util]: http://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html
 [DemoBasicCollection]: DemoBasicCollection
