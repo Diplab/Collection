@@ -213,28 +213,110 @@ API of [Map][Map.html]:
 		* entrySet
 		* values
 
-Here is the example on basic operations.
+Here is the example on basic operations and bulk operations.
 
 ```java
 	import java.util.HashMap;
+	import java.util.LinkedHashMap;
 	import java.util.Map;
+	import java.util.TreeMap;
 
 	public class DemoBasicOperation {
 
-		/**
-		 * @param args
-		 */
 		public static void main(String[] args) {
-			String[] list = "I am happy. I am good".split("[.,]?\\s+");
 			Map<String, Integer> map = new HashMap<String, Integer>();
-			for (String string : list) {
+			initializeMap(map);
+			System.out.println(map);	//{happy=1, am=2, good=1, I=2}
+			
+			map = new TreeMap<String, Integer>();
+			initializeMap(map);
+			System.out.println(map);	//{I=2, am=2, good=1, happy=1}: in alphabetical order
+			
+			//all general-purpose Map implementations provide constructors that take a Map object 
+			//and initialize the new Map to contain all the key-value mappings in the specified Map.
+			map = new LinkedHashMap<String, Integer>(map);
+			System.out.println(map);	//{I=2, am=2, good=1, happy=1}
+			
+			
+			System.out.println(map);
+			
+			Map<String, Integer> map2 = new HashMap<String, Integer>();
+			map2.putAll(map);
+			System.out.println(map2);	//{happy=1, am=2, good=1, I=2}
+			
+			map2.clear();
+			System.out.println(map2);	//{}
+
+		}
+		public static final String[] LIST = "I am happy. I am good".split("[.,]?\\s+");
+		public static void initializeMap(Map<String, Integer> map){
+			for (String string : LIST) {
 				Integer i = map.get(string);
 				map.put(string, (i == null) ? 1 : i + 1);
 			}
-			System.out.println(map);		//{happy=1, am=2, good=1, I=2}
 		}
 
 	}
+
+```
+
+Demo collection view:
+
+```java
+	import java.util.HashMap;
+	import java.util.HashSet;
+	import java.util.Map;
+	import java.util.Set;
+
+	public class DemoCollectionView {
+
+		public static final String[] LIST = "I am happy. I am good"
+				.split("[.,]?\\s+");
+
+		static <K, V> boolean validate(Map<K, V> attrMap, Set<K> requiredAttrs,
+				Set<K> permittedAttrs) {
+			boolean valid = true;
+			Set<K> attrs = attrMap.keySet();
+
+			if (!attrs.containsAll(requiredAttrs)) {
+				Set<K> missing = new HashSet<K>(requiredAttrs);
+				missing.removeAll(attrs);
+				System.out.println("Missing attributes: " + missing);
+				valid = false;
+			}
+			if (!permittedAttrs.containsAll(attrs)) {
+				Set<K> illegal = new HashSet<K>(attrs);
+				illegal.removeAll(permittedAttrs);
+				System.out.println("Illegal attributes: " + illegal);
+				valid = false;
+			}
+			return valid;
+		}
+
+		public static Map<String, Integer> getMap() {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			for (String string : LIST) {
+				Integer i = map.get(string);
+				map.put(string, (i == null) ? 1 : i + 1);
+			}
+			return map;
+		}
+
+		public static void main(String[] args) {
+
+			Map<String, Integer> map = getMap();
+			
+			//throw  java.lang.UnsupportedOperationException
+			//map.keySet().add("123");
+			Set<String> requiredAttrs = new HashSet<String>(map.keySet());
+			requiredAttrs.add("123");
+			Set<String> permittedAttrs = new HashSet<String>(map.keySet());
+			permittedAttrs.add("234");
+			map.put("adsf",2);
+			System.out.println(validate(map, requiredAttrs, permittedAttrs));
+		}
+	}
+
 ```
 
 ### List
