@@ -212,6 +212,7 @@ API of [Map][Map.html]:
 		* keySet
 		* entrySet
 		* values
+- The Collection views **do not** support element addition under any circumstances. 
 
 Here is the example on basic operations and bulk operations.
 
