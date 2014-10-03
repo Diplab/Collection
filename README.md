@@ -586,6 +586,30 @@ See below code:
 	}
 ```
 
+More one:
+
+```java
+	static final Comparator<Employee> SENIORITY_ORDER = 
+	                                        new Comparator<Employee>() {
+	    public int compare(Employee e1, Employee e2) {
+	        int dateCmp = e2.hireDate().compareTo(e1.hireDate());
+	        if (dateCmp != 0)
+	            return dateCmp;
+
+	        return (e1.number() < e2.number() ? -1 :
+	               (e1.number() == e2.number() ? 0 : 1));
+	    }
+	};
+```
+
+One last note: You might be tempted to replace the final return statement in the Comparator with the simpler below.
+Don't do it unless you're absolutely sure no one will ever have a negative employee number! This trick does not work in general because the signed integer type is not big enough to represent the difference of two arbitrary signed integers. If i is a large positive integer and j is a large negative integer, i - j will overflow and will return a negative integer. The resulting comparator violates one of the four technical restrictions we keep talking about (transitivity) and produces horrible, subtle bugs. This is not a purely theoretical concern; people get burned by it.
+
+```java
+	return e1.number() - e2.number();
+```
+
+
 ## Iterator
 
 The `remove` method may be called only once per call to next and throws an exception if this rule is violated.
