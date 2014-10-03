@@ -527,6 +527,10 @@ The general contract of hashCode is:
 
 ## Comparator
 
+The Comparator in the preceding program works fine for sorting a List, but it does have one deficiency: It cannot be used to order a **sorted collection**, such as `TreeSet`, because it generates an ordering that is **not** compatible with equals. This means that this Comparator equates objects that the equals method does not. In particular, any two employees who were hired on the same date will compare as equal. When you're sorting a List, this doesn't matter; but when you're using the Comparator to order a sorted collection, it's fatal. If you use this Comparator to insert multiple employees hired on the same date into a TreeSet, only the first one will be added to the set; the second will be seen as a duplicate element and will be ignored.
+
+To fix this problem, simply tweak the `Comparator` so that it produces an ordering that is compatible with equals. In other words, tweak it so that the only elements seen as equal when using compare are those that are also seen as equal when compared using equals. The way to do this is to perform a two-part comparison (as for Name), where the first part is the one we're interested in — in this case, the hire date — and the second part is an attribute that uniquely identifies the object. Here the employee number is the obvious attribute. This is the Comparator that results.
+
 See below code:
 
 ```java
